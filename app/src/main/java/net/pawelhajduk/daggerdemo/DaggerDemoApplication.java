@@ -20,4 +20,8 @@ public class DaggerDemoApplication extends Application {
     public static void buildComponentAndInject() {
         graph = DaggerDemoComponent.Initializer.init(instance);
     }
+
+    public static void setGraph(DaggerDemoGraph graph) {
+        DaggerDemoApplication.graph = graph;
+    }
 }

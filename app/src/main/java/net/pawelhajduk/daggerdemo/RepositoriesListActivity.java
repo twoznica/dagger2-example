@@ -47,7 +47,7 @@ public class RepositoriesListActivity extends ListActivity {
               }, new Action1<Throwable>() {
                   @Override
                   public void call(Throwable throwable) {
-                      Log.e("RepositoriesListActivity", "Error receiving list of repos", throwable);
+                      Log.e("RepoListActivity", "Error receiving list of repos", throwable);
                   }
               });
     }

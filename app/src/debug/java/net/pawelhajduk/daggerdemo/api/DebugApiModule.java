@@ -22,7 +22,7 @@ public class DebugApiModule {
 
     @Provides
     @Singleton
-    GitHubService provideGitHubService(RestAdapter restAdapter, MockRestAdapter mockRestAdapter, MockGitHubService mockService,
+    protected GitHubService provideGitHubService(RestAdapter restAdapter, MockRestAdapter mockRestAdapter, MockGitHubService mockService,
                                        @UseMockBackend BooleanPreference useMockMode) {
         if(useMockMode.get()) {
             return mockRestAdapter.create(GitHubService.class, mockService);

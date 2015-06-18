@@ -23,14 +23,15 @@ android {
             storePassword 'release'
         }
     }
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
     defaultConfig {
         applicationId "net.pawelhajduk.daggerdemo"
-        minSdkVersion 15
-        targetSdkVersion 21
+        minSdkVersion 18
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -39,19 +40,65 @@ android {
         }
     }
 
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+        exclude 'LICENSE.txt'
+    }
+
 }
 
 dependencies {
     provided 'javax.annotation:jsr250-api:1.0'
-    apt "com.google.dagger:dagger-compiler:2.0-SNAPSHOT"
+    compile 'com.google.dagger:dagger-compiler:2.0.1'
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.google.dagger:dagger:2.0-SNAPSHOT'
+    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.retrofit:retrofit-mock:1.9.0'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
-    compile 'io.reactivex:rxjava:1.0.4'
-    compile 'io.reactivex:rxandroid:0.23.0'
+    compile 'io.reactivex:rxjava:1.0.10'
+    compile 'io.reactivex:rxandroid:0.24.0'
+    compile 'com.google.guava:guava:18.0'
+
+    //rxspresso
+    androidTestCompile 'com.novoda:rxpresso:0.1.4'
+
+    //espresso
+    androidTestCompile 'com.android.support.test:runner:0.2'
+    androidTestCompile 'com.android.support.test:rules:0.3'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2'
+
+    //uiautomator
+    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.0.0'
+
+    //burst
+    androidTestCompile "com.squareup.burst:burst-junit4:1.1.0"
+
+}
+
+configurations.all {
+    // Espresso depends on the now-obsolete junit-dep module. There's no need for it since we
+    // already bring in the main junit module.
+    exclude group: 'junit', module: 'junit-dep'
+
+    resolutionStrategy {
+        // Espresso depends on version 1.1 of Hamcrest, and doesn't work with 1.3. JUnit relies on
+        // hamcrest-core 1.3, but seems to work with 1.1. So we need to override Gradle's default
+        // resolution strategy and force 1.1 to be used.
+        force 'org.hamcrest:hamcrest-core:1.2'
+        force 'org.hamcrest:hamcrest-integration:1.2'
+        force 'org.hamcrest:hamcrest-library:1.2'
+    }
 }
