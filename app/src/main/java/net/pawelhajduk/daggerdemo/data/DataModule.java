@@ -24,7 +24,7 @@ public class DataModule {
 
     @Provides
     @Singleton
-    SharedPreferences provideSharedPreferences(Application app) {
+    protected SharedPreferences provideSharedPreferences(Application app) {
         return app.getSharedPreferences("daggerdemo", Context.MODE_PRIVATE);
     }
 

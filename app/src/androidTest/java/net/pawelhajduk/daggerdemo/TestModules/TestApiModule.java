@@ -1,4 +1,4 @@
-package net.pawelhajduk.daggerdemo;
+package net.pawelhajduk.daggerdemo.TestModules;
 
 
 

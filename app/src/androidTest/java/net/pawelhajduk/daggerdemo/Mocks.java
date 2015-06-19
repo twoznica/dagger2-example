@@ -14,5 +14,8 @@ public class Mocks {
                                                                      new Repository("element 2", 3, 3),
                                                                      new Repository("element 3", 3, 3));
 
-
+    public static final List<Repository> MOCKED_LIST_ALT = Arrays.asList(new Repository("element 6", 3, 3),
+                                                                     new Repository("element 7", 3, 3),
+                                                                     new Repository("element 8", 3, 3),
+                                                                     new Repository("element 9", 3, 3));
 }
