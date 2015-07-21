@@ -14,6 +14,8 @@ repositories {
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }
 
+
+
 android {
     signingConfigs {
         release {
@@ -23,6 +25,11 @@ android {
             storePassword 'release'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
@@ -104,4 +111,22 @@ configurations.all {
         force 'org.hamcrest:hamcrest-integration:1.2'
         force 'org.hamcrest:hamcrest-library:1.2'
     }
+
+
 }
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'me.tatarka:gradle-retrolambda:2.5.0'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'me.tatarka.retrolambda'
